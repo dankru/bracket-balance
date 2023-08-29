@@ -13,17 +13,16 @@ var m = map[rune]rune{
 }
 
 func main() {
-	fmt.Println(isBalanced("(][)"))
-	fmt.Println(isBalanced("qg"))
-	fmt.Println(isBalanced(""))
-	fmt.Println(isBalanced(")("))
-	fmt.Println(isBalanced("[()]"))
+	// Собираем пользовательский ввод и пропускаем через функцию
+	var input string
+	fmt.Print("Enter input brackets: ")
+	fmt.Scanln(&input)
+	fmt.Println(isBalanced(input))
 }
 
 // функция isBalanced проходит по каждому символу строки и с помощью стека проверяет, состоит ли строка из сбалансированных скобок
 func isBalanced(inputStr string) string {
 	var notBalanced = "Скобки не сбалансированы"
-
 	// В случае если строка пустая, или длина нечётная, отбрасываем решение
 	if inputStr == "" || len(inputStr)%2 != 0 {
 		return notBalanced
@@ -33,7 +32,6 @@ func isBalanced(inputStr string) string {
 	var stack myStack.Stack
 
 	for _, bracket := range inputStr {
-
 		_, ok := m[bracket]
 		if ok {
 			// При нахождении открывающей скобки пушим в стек соответствующую ей закрывающую скобку
@@ -47,7 +45,7 @@ func isBalanced(inputStr string) string {
 			}
 		}
 	}
-	// Если стек оказался пуст после прохода по строке, значит вложенность и количество открывающих и закрывающих скобок валидные
+	// Если стек оказался пуст после прохода по строке, значит вложенность и количество открывающих и закрывающих скобок
 	if len(stack.Items) == 0 {
 		return "Скобки сбалансированы"
 	}
